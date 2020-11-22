@@ -1,0 +1,52 @@
+#include <iostream>
+
+using namespace std;
+
+const int NUM_CARS=2;
+
+
+struct cars
+{
+
+    string brand;
+    string model;
+    int yearofmodel;
+};
+cars carslist[NUM_CARS];
+int main()
+{
+    int i ;
+    for(i=0; i<NUM_CARS; i++)
+    {
+        cout<<"enter brand :"<<"\n";
+        cin>>carslist[i].brand;
+        cout<<"enter the model:"<<"\n";
+        cin>>carslist[i].model;
+        cout<<"enter year of the model:"<<"\n";
+        cin>>carslist[i].yearofmodel;
+    }
+    int maximum=carslist[0].yearofmodel;
+    for(i=1; i<NUM_CARS; i++)
+    {
+        if(maximum<carslist[i].yearofmodel)
+        {
+            maximum=carslist[i].yearofmodel;
+        }
+
+    }
+    for(i=0; i<NUM_CARS; i++)
+    {
+        if(maximum==carslist[i].yearofmodel)
+        {
+            cout<<"the car with the newest model is : "<<carslist[i].brand<<"\n";
+            cout<<"the model is :"<<carslist[i].model<<"\n";
+            cout<<"the year of model is :"<<carslist[i].yearofmodel<<"\n";
+        }
+    }
+
+
+
+
+
+    return 0;
+}
