@@ -1,0 +1,135 @@
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+/*first step is asking the user to give an input 3 digit number
+and display for the user the possible three forms of the input 3-digit number included the form that the user entered*/
+
+ int num, num1 , num2 , num3 , x , y , z ,sum1 , sum2 , sum3 ;
+ cout<<"please enter 3-digit number  " ;
+ cin>>num;
+
+ //using ("\n") a lot along the whole code to give separated lines to produce an organized output screen//
+ cout<<"\n" ;
+ cout<<"the number you entered is "<<num<<"\n" ;
+ cout<<"\n" ;
+
+ //then we divide the number the user entered by 100 to get the first digit of it and ignore the decimal part (here we separate the number into three parts //
+ //then divide the number by 10 to get the first two digits as a whole number then modulus this part//
+ // to get the reminder which is the second part of the number entered by the user //
+ //then modulus the number by 10 to get the third part of the number so, we have the number separated into three separated numbers //
+ num1=num/100 ;
+ num2=(num/10)%10 ;
+ num3=num%10;
+ cout<<"the first number is "<<num1<<"\n";
+ cout<<"the second number is "<<num2<<"\n";
+ cout<<"the third number is "<<num3<<"\n";
+ cout<<"\n" ;
+ cout<<"the other two forms of the number you entered is"<<(num2*100)+(num3*10)+num1<<"  and  "<<(num3*100)+(num1*10)+num2<<"\n" ;
+
+ //then getting the reminder of each number of the three digits and save it in a new variable to be used later and display the results with an organized output to be easy for the user to understand //
+ x=(num1%11) ;
+ y=(num2%11) ;
+ z=(num3%11) ;
+ cout<<"\n" ;
+ cout<<"the reminder of first number of 3-digit number you entered"<<"\n" ;
+ cout<<"when divided by 11 is known as x = "<<x<<"\n" ;
+ cout<<"\n" ;
+ cout<<"the second reminder is known as y = "<<y<<"\n" ;
+ cout<<"\n" ;
+ cout<<"the third reminder is known as z = " <<z<<"\n";
+ cout<<"\n" ;
+
+
+ // start to have the summations of the calculated reminders and save them into a new variables and display them  //
+ sum1=(x+y);
+ sum2=(y+z);
+ sum3=(z+x);
+ cout<<" x+y=  "<<sum1<<"\n" ;
+ cout<<"\n" ;
+ cout<<" y+Z=  "<<sum2<<"\n" ;
+ cout<<"\n" ;
+ cout<<" z+x=  "<<sum3<<"\n" ;
+ cout<<"\n" ;
+
+
+
+ // a short brief as an output for the user to understand the calculations that is going to be done within the code //
+ cout<<" A new summation will be executed"<<"\n" ;
+ cout<<"\n" ;
+ cout<<" if one of the summation of the above is equals to an odd number or"<<"\n" ;
+ cout<<"it will be as it if it is an even number "<<"\n" ;
+ cout<<"\n" ;
+ cout<<"so the new summation is going to be the old one either add 11 to it"<<"\n" ;
+ cout<<"  or subtract 11 from it "<<"\n" ;
+ cout<<"\n" ;
+ cout<<"and that's depending on the limited value which is equals to 20"<<"\n" ;
+ cout<<"\n" ;
+ cout<<"and this operation is going to be applied only on the odd value of the above summations "<<"\n" ;
+ cout<<"\n" ;
+ cout<<"\n" ;cout<<"\n" ;
+
+
+
+ /*testing if one of the summations is an odd value so we are going to add or subtract 11 form the number
+  but we have a condition that either the summation or the subtraction not exceed 20 */
+  if(sum1%2!= 0)
+ {
+   if(sum1+11 >= 20)
+    sum1=sum1-11 ;
+   else
+    sum1=sum1+11 ;
+ }
+cout<<"new summation of (x+y) is = " <<sum1<<"\n" ;
+cout<<"\n" ;
+if(sum2%2 != 0)
+ {
+   if(sum2+11 >= 20 )
+    sum2=sum2-11 ;
+   else
+    sum2=sum2+11 ;
+ }
+cout<<"new summation of (y+z) is = " <<sum2<<"\n" ;
+cout<<"\n" ;
+if(sum3%2 != 0)
+ {
+   if(sum3+11 >= 20)
+    sum3=sum3-11 ;
+   else
+    sum3=sum3+11 ;
+ }
+cout<<"new summation of (z+x) is =  " <<sum3<<"\n" ;
+cout<<"\n" ;
+//start to have the halves of the new summations and display them on the output screen //
+cout<<"the half value of each of the new summations is going to be displayed below:   " <<"\n" ;
+cout<<"\n" ;
+cout<<"half of new summation of sum1 is equals to   "<<sum1/2<<"\n" ;
+cout<<"\n" ;cout<<"\n" ;
+cout<<"half of new summation of sum2 is equals to   "<<sum2/2<<"\n" ;
+cout<<"\n" ;cout<<"\n" ;
+cout<<"half of new summation of sum1 is equals to   "<<sum3/2<<"\n";}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
