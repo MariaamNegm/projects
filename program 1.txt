@@ -1,0 +1,263 @@
+#include <iostream>
+#include<cstdlib>
+using namespace std;
+
+void allEven(int , int);
+void allOdd (int , int);
+void getSum (int , int);
+void allPrime ( int , int );
+void maxPrime (int , int );
+void maxNonprime (int , int );
+void totalNonprime (int ,int );
+void NewRange (int& , int& );
+
+
+
+int main()
+{
+
+    int startValue ,endValue;
+    string choice ;
+ cout<<"enter your startValue " <"\n" ;
+ cout<<"\n";
+ cin>>startValue ;
+ cout<<"\n";
+ cout<<"enter your endValue"<<"\n" ;
+ cout<<"\n";
+ cin>>endValue ;
+ cout<<"\n";
+        cout<<"\n";
+        cout<<"\n";
+ do {
+     cout<<"\n";
+     cout<<"\n";
+    cout<<"(1)- Get all Even numbers within the range"<<"\n" ;
+    cout<<"\n";
+    cout<<"(2)- Get all odd numbers within the range"<<"\n" ;
+    cout<<"\n";
+    cout<<"(3)- Get the sum of the numbers within the range"<<"\n" ;
+    cout<<"\n";
+    cout<<"(4)- Get all prime numbers within the range"<<"\n" ;
+    cout<<"\n";
+    cout<<"(5)- Get maximum prime number within the range"<<"\n" ;
+    cout<<"\n";
+    cout<<"(6)- Get maximum non-prime number within the range"<<"\n" ;
+    cout<<"\n";
+    cout<<"(7)- Get total number of non-prime numbers within the range"<<"\n" ;
+    cout<<"\n";
+    cout<<"(8)- Enter new range"<<"\n" ;
+    cout<<"\n";
+    cout<<"(E)- Exit program"<<"\n" ;
+    cout<<"\n";
+    cout<<"please enter your choice " <<"\n" ;
+    cout<<"\n";
+    cin>>choice ;
+    cout<<"\n";
+         if(choice=="1")
+            {allEven(startValue,endValue);}
+         else if(choice=="2")
+            {allOdd(startValue,endValue);}
+         else if(choice=="3")
+            {getSum(startValue,endValue);}
+         else if(choice=="4")
+            {allPrime(startValue,endValue);}
+         else if(choice=="5")
+            {maxPrime(startValue,endValue);}
+         else if(choice=="6")
+            {maxNonprime(startValue,endValue);}
+         else if(choice=="7")
+            {totalNonprime(startValue,endValue);}
+         else if(choice=="8")
+            {NewRange(startValue,endValue);}
+         else if(choice=="E")
+        {
+            exit(0);
+        }
+        else{
+            cout<<" wrong choice , you must re-enter a choice from the list "<<"\n";
+            cout<<"\n";
+            cout<<"\n";
+            }
+  }while( (choice)!= "E");
+return 0;
+ }
+
+
+void allEven(int x , int y )
+{
+   int num ,temp ;
+    if(x>y){
+    temp = x;
+    x=y ;
+    y=temp ;
+    }
+ for (num=x;num<=y;num++){
+      if(num%2==0)
+      cout<<num<<" " ;
+      }
+}
+
+
+void allOdd(int x , int y)
+{
+    int num ,temp ;
+    if(x>y)
+    {
+     temp = x;
+     x=y ;
+     y=temp ;
+     }
+ for (num=x;num<=y;num++)
+    {
+      if(!(num%2==0))
+      cout<<num<<" " ;
+    }
+}
+
+
+void getSum(int x , int y)
+{
+  int num ,temp ;
+  int res ;
+  res = 0 ;
+    if(x>y)
+    {
+    temp = x;
+    x=y ;
+    y=temp ;
+    }
+  for(num=x;num<=y;num++){
+    res=res+num ;}
+  cout<<res  ;
+  cout<<"\n" ;
+
+
+}
+void allPrime(int x,int y){
+     int num ,temp , J ,count;
+    if(x>y)
+    {
+     temp = x;
+     x=y ;
+     y=temp ;
+     }
+   for (num=x;num<=y;num++)
+
+    {   if(num!=1 && num!=0 ){
+         count=1;
+      for(J=2; J<num ; J++){
+
+         if((num%J==0)){
+         count=0 ;
+         break;
+         }
+      }
+    }
+      if(count==1)
+        cout<<num<<" ";
+    }
+}
+
+
+void maxPrime(int x ,int y){
+      int num ,temp , J ,count,maxoo;
+      maxoo=0;
+    if(x>y)
+    {
+     temp = x;
+     x=y ;
+     y=temp ;
+     }
+   for (num=x;num<=y;num++)
+
+    {   if(num!=1){
+         count=1;
+      for(J=2; J<num ; J++){
+
+         if((num%J==0)){
+         count=0 ;
+         break;
+         }
+      }
+    }
+      if(count==1){
+        if(maxoo<num)
+           maxoo=num;}
+
+    }
+   cout<<maxoo<<"  ";
+}
+
+
+void maxNonprime(int x,int y){
+    int num ,temp , J ,count,maxoo;
+      maxoo=0;
+    if(x>y)
+    {
+     temp = x;
+     x=y ;
+     y=temp ;
+     }
+   for (num=x;num<=y;num++)
+
+    {  if(num==1 || num!=1){
+         count=1;
+      for(J=2; J<num ; J++){
+
+         if(num%J==0  || num==1 ){
+         count=0 ;
+         break;
+         }
+      }
+    }
+      if(count==0){
+        if(maxoo<num)
+           maxoo=num;}
+
+    }
+   cout<<maxoo<<" ";
+
+}
+
+
+ void totalNonprime(int x , int y){
+     int num ,temp , J ,count,maxoo , counter;
+      maxoo=0;
+      counter=0;
+    if(x>y)
+    {
+     temp = x;
+     x=y ;
+     y=temp ;
+     }
+   for (num=x;num<=y;num++)
+
+    {  if(num!=1){
+         count=1;
+      for(J=2; J<num ; J++){
+         if(num%J==0){
+         count=0 ;
+         break;
+         }
+      }
+    }
+       if(num==1)
+        count=0;
+
+      if(count==0){
+        if(maxoo<num)
+           maxoo=num;
+           counter++;}
+    }
+   cout<<counter;
+ }
+
+
+void NewRange(int&x , int&y ){
+    cout<<" enter your startValue"<<"\n";
+    cout<<"\n";
+    cin>>x;
+    cout<<"enter your endValue"<<"\n";
+    cout<<"\n";
+    cin>>y;
+}
