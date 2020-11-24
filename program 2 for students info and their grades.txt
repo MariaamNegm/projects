@@ -1,0 +1,445 @@
+#include <iostream>
+#include<iomanip>
+#include<cstdlib>
+using namespace std;
+const int NAMES_STUDENTS= 6;
+const int COURSES = 3 ;
+int i , l;
+char choice ;
+string names[NAMES_STUDENTS];
+string coursesnames[COURSES];
+double grades[NAMES_STUDENTS][COURSES];
+
+
+void averagecourse(double[][COURSES],int,string[],string coursesnames[]);
+void gethigh(double[][COURSES],int,string[],string coursesnames[]);
+void getlow(double[][COURSES],int,string[],string coursesnames[]);
+void displayTable(double [][COURSES],int,string names[],string coursesnames[]);
+void namesofcourses(string[COURSES]);
+void listofstudents(string[NAMES_STUDENTS]);
+void modifycoursename(string[COURSES]);
+void modifyscore(double[][COURSES],int,string[],string coursesnames[]);
+void sorting(double[][COURSES],int,string[],string coursesnames[]);
+void gpa(double[][COURSES],int,string[],string coursesnames[]);
+int main()
+{
+    int i , l;
+    int choice ;
+    string names[NAMES_STUDENTS];
+    string coursesnames[COURSES];
+    double grades[NAMES_STUDENTS][COURSES];
+    cout<<"please enter student's names [enter 6 names ]  "<<"\n"<<"\n" ;
+    for(i=0;i<NAMES_STUDENTS;i++){
+        cin>>names[i];
+         cout<<"\n";}
+
+    cout<<"please enter courses names [enter 3 courses name] "<<"\n"<<"\n";
+    for(l=0;l<COURSES;l++){
+        cin>>coursesnames[l];
+         cout<<"\n";}
+
+    for(i=0;i<NAMES_STUDENTS;i++)
+        { for(l=0;l<COURSES;l++)
+          {
+              cout<<"please enter grade of  "<<names[i]<<" in "<<coursesnames[l]<<"\n";
+              cout<<"\n";
+              cin>>grades[i][l];
+              cout<<"\n";
+
+          }
+
+        }
+    do{
+            cout<<"\n";
+            cout<<"\n";
+       cout<<" 1- Calculate and display the average GPA for each student "<<"\n";
+        cout<<"\n";
+       cout<<" 2- Display the student with the highest grade in each course. "<<"\n";
+        cout<<"\n";
+       cout<<" 3- Display the student with the lowest grade in each course."<<"\n";
+        cout<<"\n";
+       cout<<" 4- Display the average grade in each course."<<"\n";
+        cout<<"\n";
+       cout<<" 5- Display students and their grades in all courses"<<"\n";
+        cout<<"\n";
+       cout<<" 6- Display Course names."<<"\n";
+        cout<<"\n";
+       cout<<" 7- Display Student names. "<<"\n";
+        cout<<"\n";
+       cout<<" 8- Modify a students grade in a course."<<"\n";
+        cout<<"\n";
+       cout<<" 9- Modify a course name."<<"\n";
+        cout<<"\n";
+       cout<<"10- Sort the students (and their grades) alphabetically "<<"\n";
+        cout<<"\n";
+       cout<<"11-EXIT  "<<"\n";
+       cout<<"\n";
+       cout<<"\n";
+       cout<<"please enter a choice "<<"\n";
+       cin>>choice;
+
+          if(choice==2){
+            gethigh(grades,NAMES_STUDENTS,names,coursesnames);}
+
+           else if (choice==5){
+            displayTable(grades,NAMES_STUDENTS,names,coursesnames);}
+
+         else if (choice==3){
+            getlow(grades,NAMES_STUDENTS,names,coursesnames);}
+
+          else if (choice==4){
+            averagecourse(grades,NAMES_STUDENTS,names,coursesnames);}
+
+          else if (choice==6){
+            namesofcourses(coursesnames);}
+
+          else if (choice==7){
+            listofstudents(names);}
+
+         else if(choice==9){
+            modifycoursename(coursesnames);}
+
+         else if (choice==8){
+            modifyscore(grades,NAMES_STUDENTS,names,coursesnames);}
+
+          else if (choice==10){
+            sorting(grades,NAMES_STUDENTS,names,coursesnames);}
+
+          else if (choice==1){
+            gpa(grades,NAMES_STUDENTS,names,coursesnames);}
+          else if (choice==11)
+          {
+              exit(0);
+          }
+          else
+          {
+              cout<<" wrong choice , you must re-enter a choice from the list "<<"\n" ;
+          }
+
+    }while(choice!= 11);
+
+
+
+
+    return 0;
+}
+
+
+void displayTable(double grades[][COURSES],int NAMES_STUDENTS,string names[],string coursesnames[]){
+cout<<"student's name"<<"\t"<<coursesnames[0]<<"\t"<<"\t"<<coursesnames[1]<<"\t"<<"\t"<<coursesnames[2]<<"\n";
+cout<<"\n";
+    for(i=0;i<NAMES_STUDENTS;i++)
+    {
+        cout<<names[i]<<"\t"<<"\t";
+
+        for(l=0;l<COURSES;l++)
+     {  cout<<fixed<<setprecision(2)<<grades[i][l]<<"\t"<<"\t";
+
+     }
+      cout<<"\n";
+      cout<<"\n";
+    }
+}
+
+ void getlow(double grades[][COURSES],int NAMES_STUDENTS,string names[],string coursesnames[])
+ {
+   double lowestt = 1500 ;
+   string courseprint ;
+   for(i=0;i<NAMES_STUDENTS;i++)
+   {   double lowestt=1500;
+     for(l=0;l<COURSES;l++)
+     {
+        if(grades[i][l]<lowestt){
+            lowestt=grades[i][l];
+            courseprint=coursesnames[l];
+        }
+     }
+     cout<<names[i]<<"\t"<<" got the lowest in  "<<"\t"<<courseprint<<"\t"<<" and got "<<lowestt<<"\n";
+     cout<<"\n";
+   }
+
+ }
+
+void averagecourse(double grades[][COURSES],int NAMES_STUDENTS,string names[],string coursesnames[])
+{
+    string coursename ;
+    double sum=0;
+    cout<<"COURSE_NAME:"<<"\t"<<"AVERAGE OF COURSE"<<"\n";
+    cout<<"\n";
+  for(l=0;l<COURSES;l++)
+  {     double sum=0;
+      for(i=0;i<NAMES_STUDENTS;i++)
+      {
+        sum+=grades[i][l];
+        coursename=coursesnames[l];
+      }
+      cout<<coursename<<"\t"<<"\t"<<fixed<<setprecision(2)<<(sum/NAMES_STUDENTS)<<"\n";
+      cout<<"\n";
+  }
+
+
+}
+
+void namesofcourses(string coursesnames[COURSES])
+{
+    cout<<"COURSE_LIST:"<<"\n";
+  for(l=0;l<COURSES;l++)
+  {
+    cout<<"\t"<<"\t"<<coursesnames[l]<<"\n";
+    cout<<"\n";
+  }
+
+}
+
+void listofstudents(string names[NAMES_STUDENTS])
+{
+    cout<<"STUDENTS_LIST:"<<"\n";
+    for(i=0;i<NAMES_STUDENTS;i++)
+    {
+       cout<<"\t"<<"\t"<<names[i]<<"\n";
+       cout<<"\n";
+    }
+}
+
+
+
+
+void gethigh(double grades[][COURSES],int NAMES_STUDENTS,string names[],string coursesnames[]){
+    double highscore = 0 ;
+    string newoo ;
+    for(i=0;i<NAMES_STUDENTS;i++)
+    {   double highscore =0 ;
+       for(l=0;l<COURSES;l++)
+       {
+         if(grades[i][l]>highscore){
+            highscore=grades[i][l];
+            newoo=coursesnames[l];}
+       }
+        cout<<names[i]<<"\t"<<" got the highest score in "<<"\t"<<newoo<<"\t"<<" and got "<< highscore<<"\n";
+        cout<<"\n";
+    }
+}
+
+void modifycoursename(string coursesnames[COURSES]){
+   bool found = true ;
+   cout<<"enter the current name of the course "<<"\n";
+   cout<<"\n";
+   string x , newcourse60 ;
+   cin>>x;
+   cout<<"\n";
+   do{
+       for(l=0;l<COURSES;l++)
+       {
+        if(coursesnames[l]== x)
+       {
+         cout<<"enter the new name of the course"<<"\n";
+         cout<<"\n";
+         cin>>newcourse60;
+         cout<<"\n";
+         coursesnames[l]= newcourse60 ;
+         cout<<"\n";
+         cout<<" updated successfully!!"<<"\n";
+         found = false ;
+       }
+      }
+      if(found){
+        cout<<" invalid entry , please re enter "<<"\n";
+        cout<<"\n";
+        cin>>x;
+        cout<<"\n";
+       }
+
+    }while(found);
+
+}
+
+void modifyscore(double grades [][COURSES],int NAMES_STUDENTS,string names[],string coursesnames[])
+{ string x ,y ;
+    bool fo = true;
+    int q ;
+cout<<"enter student name ";
+cout<<"\n";
+cin>> x;
+cout<<"\n";
+do{
+  for(i=0;i<NAMES_STUDENTS;i++)
+  {
+    if(names[i]==x)
+    {
+      fo=false ;
+      q=i;
+      break;
+    }
+  }
+   if(fo){
+    cout<<" name is not found. please enter another name "<<"\n";
+    cout<<"\n";
+    cin>>x;
+    cout<<"\n";
+      }
+  }while(fo);
+
+
+
+ bool found1 =true;
+ int w ;
+ cout<<"enter the course name ";
+ cout<<"\n";
+ cin>>y;
+ cout<<"\n";
+  do{
+  for(l=0;l<COURSES;l++)
+  {
+    if(coursesnames[l]==y){
+        w=l;
+        found1=false;}
+  }
+  if(found1)
+  {
+    cout<<"invalid course name. please enter another course name "<<"\n";
+    cout<<"\n";
+    cin>>y;
+    cout<<"\n";
+  }
+  }while(found1);
+
+
+ double newscore;
+
+ bool found2 = true;
+  cout<<"student selected  : "<<names[q]<<"\n";
+  cout<<"\n";
+  cout<<"\n";
+  cout<<"and course selected is :  "<<coursesnames[w]<<"\n";
+  cout<<"\n";
+  cout<<"\n";
+  cout<<"grade selected is :  "<<fixed<<setprecision(2)<<grades[q][w];
+  cout<<"\n";
+  cout<<"\n";
+  cout<<"\n";
+  cout<<"enter the new value of grade "<<"\n";
+  cout<<"\n";
+  cin>>newscore;
+  cout<<"\n";
+  do{
+      if(newscore==0 || newscore<0 || newscore>100){
+            cout<<"\n";
+      cout<<" wrong input , try again "<<"\n";
+      cin>>newscore;
+      cout<<"\n";
+      }
+      else
+        found2=false;
+
+  }while(found2);
+
+   grades[q][w]=newscore;
+
+  cout<<"student selected is : "<< names[q];
+  cout<<"\n";
+  cout<<"course selected is :  "<<coursesnames[w];
+  cout<<"\n";
+  cout<<"new grade is  : "<<fixed<<setprecision(2)<< newscore<<"\n";
+  cout<<"\n";
+  cout<<"\n";
+  cout<<" updated successfully !! "<<"\n";
+
+}
+
+void sorting(double grades[][COURSES],int NAMES_STUDENTS,string namess[],string coursesnames[])
+{
+    string temp, mini,tempo,tempo1 ;
+    int k , king,p ;
+    bool found = true ;
+  for(i=0;i<NAMES_STUDENTS;i++)
+    {
+       mini=namess[i];
+       bool found = true ;
+    for(l=i+1;l<NAMES_STUDENTS;l++)
+    {
+        if(mini>namess[l])
+            {
+                temp=mini;
+                mini=namess[l];
+                namess[l]=temp;
+                found=false;
+                for(k=0;k<COURSES;k++)
+                  {
+                    king=grades[i][k];
+                    grades[i][k]=grades[l][k];
+                    grades[l][k]=king;
+
+                  }
+
+              }
+
+
+
+    }
+     tempo=namess[i];
+     namess[i]=mini;
+
+    }
+
+
+    for(i=0;i<NAMES_STUDENTS;i++)
+    {
+        cout<<namess[i]<<"\n";
+        cout<<"\n";
+        cout<<"\n";
+    }
+
+
+}
+
+
+
+
+
+void gpa(double grades[][COURSES],int NAMES_STUDENTS,string names[],string coursesnames[])
+{   cout<<"STUDENTS_NAMES"<<"\t"<<"\t"<<"AVERAGE_GPA:"<<"\n";
+    double sum = 0 ;
+    double s ;
+    for(i=0;i<NAMES_STUDENTS;i++)
+    {    cout<<"\n";
+        cout<<names[i];
+         double sum = 0 ;
+        for(l=0;l<COURSES;l++)
+        {
+           sum+=grades[i][l];
+           s=(sum/COURSES);
+
+        }
+        if((s)>90 || s==90){
+                cout<<"\t"<<"\t"<<"\t"<<"4.00"<<"\n";
+                 }
+           else if(s>80 || s==80)
+           {
+              cout<<"\t"<<"\t"<<"\t"<<"3.50"<<"\n";
+
+           }
+           else if(s>70 || s==70)
+           {
+               cout<<"\t"<<"\t"<<"\t"<<"3.00"<<"\n";
+
+           }
+           else if(s>60 || s==60)
+           {
+               cout<<"\t"<<"\t"<<"\t"<<"2.50"<<"\n" ;
+
+           }
+           else if (s>50 || s==50)
+           {
+               cout<<"\t"<<"\t"<<"\t"<<"2.00"<<"\n";
+
+           }
+           else
+            {cout<<"\t"<<"\t"<<"\t"<<"0.00"<<"\n";
+              }
+    }
+}
+
+
+
+
+
