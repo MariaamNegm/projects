@@ -1,0 +1,380 @@
+#include <iostream>
+#include <istream>
+
+using namespace std;
+
+class rectangle
+{
+    int length;
+    int width;
+public:
+    class negativesize
+    {};
+    rectangle() {};
+    rectangle(int& l,int& w)
+    {
+        if(l<0 || w<0)
+        {
+            l=0;
+            w=0;
+            throw negativesize();
+        }
+        else
+        {
+            length=l;
+            width=w;
+        }
+
+    }
+    int getlength()
+    {
+        return length;
+    }
+    int getArea()const
+    {
+        return length*width;
+    }
+    int getwidth()
+    {
+        return width ;
+    }
+    friend istream& operator>>(istream&,rectangle&);
+    ~rectangle() {}
+
+
+};
+
+istream& operator>>(istream& input, rectangle &recy )
+{
+    cout<<"Enter length and width space separated :"<<endl;
+    try
+    {
+        input>>recy.length>>recy.width;
+        rectangle(recy.length,recy.width);
+        return input;
+    }
+    catch(rectangle::negativesize)
+    {
+        cout<<"wrong length or width entering 0 and 0"<<endl;
+    }
+
+}
+
+ostream& operator<<(ostream& output,rectangle& recyt )
+{
+    output<<"length= "<<recyt.getlength()<<" , width= "<<recyt.getwidth()<<" , Area = "<<recyt.getArea();
+    return output;
+}
+
+
+
+template <class T>
+class Mylist
+{
+protected:
+    int arrsize;
+public:
+    Mylist();
+    Mylist(int sizee)
+    {
+        arrsize=sizee;
+    }
+    int getSize()const
+    {
+        return arrsize;
+    }
+    virtual void addelem(T)=0;
+    virtual int getelem()=0;
+    virtual bool isEmpty(int)=0;
+    virtual bool isFull(int)=0;
+    virtual void clearIteams()=0;
+    virtual ~Mylist() {}
+};
+
+template <class T>
+class MyQueue:public Mylist<T>
+{
+protected:
+    T*arrayy;
+    int num=0;
+    int nu=0;
+public:
+
+    MyQueue();
+    MyQueue(int s):Mylist<T>::Mylist(s)
+    {
+        arrayy = new T[s];
+    }
+    void addelem(T eli)
+    {
+
+
+
+        arrayy[num]=eli;
+        num++;
+
+
+    }
+    int getelem()
+    {
+        cout<<"\n";
+        cout<<"\n";
+        cout<<"All Elements"<<endl;
+        while(isEmpty(nu)!=true)
+        {
+
+            cout<<"element-->"<<arrayy[nu]<<endl;
+            nu++;
+
+        }
+    }
+
+    bool isEmpty(int nummyy)
+    {
+        if(nummyy==Mylist<T>::arrsize)
+            return true;
+    }
+    bool isFull(int nummy)
+    {
+        if(nummy==Mylist<T>::arrsize)
+            return true;
+    }
+    void clearIteams() {};
+    virtual ~MyQueue()
+    {
+        delete [] arrayy;
+    }
+
+};
+
+template <class T>
+class MyStack:public Mylist<T>
+{
+protected:
+    T*arr;
+    int icon=0;
+    int ic=Mylist<T>::arrsize;
+public:
+    MyStack();
+    MyStack(int s):Mylist<T>::Mylist(s)
+    {
+        arr = new T[s];
+    }
+    void addelem(T ele)
+    {
+        arr[icon]=ele;
+        icon++;
+    }
+    int getelem()
+    {
+        cout<<"\n";
+        cout<<"\n";
+        cout<<"All Elements"<<endl;
+        while(isEmpty(ic)!=true)
+        {
+            ic--;
+
+            cout<<"element-->"<<arr[ic]<<endl;
+        }
+    }
+
+    bool isEmpty(int nummyy)
+    {
+        if(nummyy==0)
+            return true;
+    }
+    bool isFull(int nummy)
+    {
+        if(nummy==Mylist<T>::arrsize)
+            return true;
+    }
+    void clearIteams() {};
+    virtual ~MyStack()
+    {
+        delete [] arr;
+    }
+
+};
+
+
+class exepction {};
+
+
+
+int main()
+{
+
+
+         string stringg;
+        cout<<"Would you like to use a stack or a queue(S/Q)?"<<endl;
+        cin>>stringg;
+        if(stringg=="S" || stringg=="s")
+        {
+            int num,choice;
+            cout<<"How many items to store?"<<endl;
+            cin>>num;
+            try
+            {
+            if(num==0 || num<0)
+            {
+                throw exepction();
+            }
+            }
+            catch(exepction)
+            {
+                cout<<"enter again but not either zero or negative values"<<endl;
+                cin>>num;
+            }
+            cout<<"\n";
+            cout<<"Would you like to store integers , strings or rectangles(1,2 or 3)?"<<endl;
+            cin>>choice;
+            cout<<"\n";
+            int youo=0;
+            if(choice==1)
+            {
+                int k;
+                MyStack<int>item(num);
+                while(item.isFull(youo)!=true)
+                {
+                    cout<<"Enter num:"<<endl;
+                    try
+                    {
+                        if(!(cin>>k))
+                        {
+                               cin.clear();
+                               cin.ignore(80,'\n');
+                               throw 8;
+                        }
+                    }
+                    catch(int r)
+                        {
+                            cout<<"wrong string input-->will enter 0"<<endl;
+
+                        }
+                    item.addelem(k);
+                    youo++;
+                }
+                item.getelem();
+
+            }
+            else if(choice==2)
+            {
+                string joi;
+                MyStack<string>item(num);
+                while(item.isFull(youo)!=true)
+                {
+                    cout<<"Enter String:"<<endl;
+                    cin>>joi;
+                    item.addelem(joi);
+                    youo++;
+                }
+                item.getelem();
+            }
+            else if(choice==3)
+            {
+                rectangle rec1;
+                MyStack<rectangle>item(num);
+                while(item.isFull(youo)!=true)
+                {
+
+                    cin>>rec1;
+                    item.addelem(rec1);
+                    youo++;
+                }
+                item.getelem();
+            }
+        }
+        else if(stringg=="Q" ||stringg=="q")
+        {
+            int numu,choicee;
+            cout<<"How many items to store?"<<endl;
+            cin>>numu;
+            try
+            {
+            if(numu==0 || numu<0)
+            {
+                throw exepction();
+            }
+            }
+            catch(exepction)
+            {
+                cout<<"enter again but not either zero or negative values"<<endl;
+                cin>>numu;
+            }
+            cout<<"\n";
+            cout<<"Would you like to store integers , strings or rectangles(1,2 or 3)?"<<endl;
+            cin>>choicee;
+            cout<<"\n";
+            int youo=0;
+
+            if(choicee==1)
+            {
+                int x;
+                bool amo=true;
+                MyQueue<int>item(numu);
+                while(item.isFull(youo)!=true)
+                {       cout<<"Enter num:"<<endl;
+
+                        try
+                        {
+                           if(!(cin>>x))
+                           {
+                               cin.clear();
+                               cin.ignore(80,'\n');
+                               throw 8;
+                           }
+
+
+                        }
+                        catch(int r)
+                        {
+                            cout<<"wrong string input-->will enter 0"<<endl;
+
+                        }
+                        item.addelem(x);
+                        youo++;
+                }
+                item.getelem();
+
+            }
+            else if(choicee==2)
+            {
+                string v;
+                MyQueue<string>item(numu);
+                while(item.isFull(youo)!=true)
+                {
+                    cout<<"Enter String:"<<endl;
+                    cin>>v;
+                    item.addelem(v);
+                    youo++;
+                }
+                item.getelem();
+
+            }
+            else if(choicee==3)
+            {
+                rectangle tio;
+                MyQueue<rectangle>item(numu);
+                while(item.isFull(youo)!=true)
+                {
+                    cin>>tio;
+                    item.addelem(tio);
+                    youo++;
+                }
+                item.getelem();
+
+            }
+        }
+        else
+        {
+            cout<<"WRONG CHOICE!!!! RUN THE PROGRAM AGAIN"<<endl;
+
+        }
+
+
+
+
+    return 0;
+
+
+}
